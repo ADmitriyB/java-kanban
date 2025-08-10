@@ -8,9 +8,6 @@ public class TaskManager {
     private final HashMap<Integer, Epic> epics = new HashMap<>();
     private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
 
-    private int generateNextId() {
-        return nextId++;
-    }
 
     public ArrayList<Task> getAllTasks() {
         return new ArrayList<>(tasks.values());
@@ -50,9 +47,11 @@ public class TaskManager {
         epics.clear();
         subtasks.clear();
     }
+
     public Epic getEpicById(int id) {
         return epics.get(id);
     }
+
     public Epic createEpic(Epic epic) {
         if (epic == null) return null;
         int id = generateNextId();
@@ -60,6 +59,7 @@ public class TaskManager {
         epics.put(id, newEpic);
         return newEpic;
     }
+
     public void updateEpic(Epic epic) {
         if (epic != null && epics.containsKey(epic.getId())) {
             Epic savedEpic = epics.get(epic.getId());
@@ -67,6 +67,7 @@ public class TaskManager {
             savedEpic.setDescription(epic.getDescription());
         }
     }
+
     public void deleteEpicById(int id) {
         Epic epic = epics.remove(id);
         if (epic != null) {
@@ -75,7 +76,8 @@ public class TaskManager {
             }
         }
     }
-    public ArrayList<Subtask> getEpicSubtasks(int epicId){
+
+    public ArrayList<Subtask> getEpicSubtasks(int epicId) {
         ArrayList<Subtask> result = new ArrayList<>();
         Epic epic = epics.get(epicId);
         if (epic != null) {
@@ -92,12 +94,15 @@ public class TaskManager {
     public ArrayList<Subtask> getAllSubtasks() {
         return new ArrayList<>(subtasks.values());
     }
+
     public void deleteAllSubtasks() {
         subtasks.clear();
     }
+
     public Subtask getSubtaskById(int id) {
         return subtasks.get(id);
     }
+
     public Subtask createSubtask(Subtask subtask) {
         if (subtask == null) return null;
         int epicId = subtask.getEpicId();
@@ -111,11 +116,13 @@ public class TaskManager {
         updateEpicStatus(epicId);
         return newSubtask;
     }
+
     public void updateSubtask(Subtask subtask) {
         if (subtask != null && subtasks.containsKey(subtask.getId())) {
             subtasks.put(subtask.getId(), subtask);
         }
     }
+
     public void deleteSubtask(int id) {
         Subtask subtask = subtasks.remove(id);
         if (subtask != null) {
@@ -153,4 +160,7 @@ public class TaskManager {
         }
     }
 
+    private int generateNextId() {
+        return nextId++;
+    }
 }
