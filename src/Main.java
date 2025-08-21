@@ -4,7 +4,7 @@ public class Main {
         System.out.println("Поехали!");
 
 
-        TaskManager manager = new InMemoryTaskManager();
+        TaskManager manager = Managers.getDefault();
 
         Task task1 = manager.createTask(new Task(0, "Task 1", TaskStatus.NEW, "Description 1"));
         Task task2 = manager.createTask(new Task(0, "Task 2", TaskStatus.NEW, "Description 2"));
