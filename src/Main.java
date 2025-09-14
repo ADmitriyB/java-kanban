@@ -5,6 +5,7 @@ public class Main {
 
 
         TaskManager manager = Managers.getDefault();
+        //HistoryManager history = Managers.getDefaultHistory();
 
         Task task1 = manager.createTask(new Task(0, "Task 1", TaskStatus.NEW, "Description 1"));
         Task task2 = manager.createTask(new Task(0, "Task 2", TaskStatus.NEW, "Description 2"));
@@ -30,7 +31,9 @@ public class Main {
 
         printAllTasks(manager);
 
+
     }
+
     private static void printAllTasks(TaskManager manager) {
         System.out.println("Задачи:");
         for (Task task : manager.getAllTasks()) {
@@ -49,9 +52,12 @@ public class Main {
             System.out.println(subtask);
         }
 
+
+
         System.out.println("История:");
         for (Task task : manager.getHistory()) {
             System.out.println(task);
         }
+
     }
 }
