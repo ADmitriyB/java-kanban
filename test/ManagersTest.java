@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class ManagersTest {
     // убедитесь, что утилитарный класс всегда возвращает проинициализированные и готовые к работе экземпляры менеджеров;
     @Test
-            void getDefaultManagersInMemoryTaskManager() {
+    void getDefaultManagersInMemoryTaskManager() {
         TaskManager taskManager = Managers.getDefault();
-assertNotNull(taskManager, "менеджер задач не готов");
+        assertNotNull(taskManager, "менеджер задач не готов");
     }
+
     @Test
     void getDefaultManagersInMemoryHistoryManager() {
         HistoryManager historyManager = Managers.getDefaultHistory();
