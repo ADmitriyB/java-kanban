@@ -19,7 +19,7 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void addAndSaveLastVersion() {
-        Task task = new Task(0, "Task 1", TaskStatus.NEW, "Description 1");
+        Task task = new Task(0,TaskType.TASK, "Task 1", TaskStatus.NEW, "Description 1");
         historyManager.addTaskToHistory(task);
         final List<Task> history = historyManager.getHistory();
         assertNotNull(history, "После добавления задачи, история не должна быть пустой.");
