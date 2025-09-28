@@ -7,18 +7,18 @@ public class Main {
         TaskManager manager = Managers.getDefault();
         //HistoryManager history = Managers.getDefaultHistory();
 
-        Task task1 = manager.createTask(new Task(0, "Task 1", TaskStatus.NEW, "Description 1"));
-        Task task2 = manager.createTask(new Task(0, "Task 2", TaskStatus.NEW, "Description 2"));
+        Task task1 = manager.createTask(new Task(0, TaskType.TASK,"Task 1", TaskStatus.NEW, "Description 1"));
+        Task task2 = manager.createTask(new Task(0, TaskType.TASK,"Task 2", TaskStatus.NEW, "Description 2"));
 
-        Epic epic1 = manager.createEpic(new Epic(0, "Epic 1", "Description Epic 1"));
-        Epic epic2 = manager.createEpic(new Epic(0, "Epic 2", "Description Epic 2"));
+        Epic epic1 = manager.createEpic(new Epic(0, TaskType.EPIC,"Epic 1", "Description Epic 1"));
+        Epic epic2 = manager.createEpic(new Epic(0, TaskType.EPIC,"Epic 2", "Description Epic 2"));
 
         Subtask subtask1 = manager.createSubtask(
-                new Subtask(0, "Subtask 1", TaskStatus.NEW, "Description Subtask 1", epic1.getId()));
+                new Subtask(0, TaskType.SUBTASK,"Subtask 1", TaskStatus.NEW, "Description Subtask 1", epic1.getId()));
         Subtask subtask2 = manager.createSubtask(
-                new Subtask(0, "Subtask 2", TaskStatus.DONE, "Description Subtask 2", epic1.getId()));
+                new Subtask(0, TaskType.SUBTASK,"Subtask 2", TaskStatus.DONE, "Description Subtask 2", epic1.getId()));
         Subtask subtask3 = manager.createSubtask(
-                new Subtask(0, "Subtask 3", TaskStatus.IN_PROGRESS, "Description Subtask 3", epic2.getId()));
+                new Subtask(0, TaskType.SUBTASK,"Subtask 3", TaskStatus.IN_PROGRESS, "Description Subtask 3", epic2.getId()));
 
         System.out.println(manager.getAllTasks());
         System.out.println(manager.getAllEpics());
@@ -40,7 +40,7 @@ public class Main {
             System.out.println(task);
         }
         System.out.println("Эпики:");
-        for (Task epic : manager.getAllTasks()) {
+        for (Task epic : manager.getAllEpics()) {
             System.out.println(epic);
 
             for (Task task : manager.getEpicSubtasks(epic.getId())) {
