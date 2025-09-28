@@ -22,6 +22,7 @@ public class Task {
     public void setStatus(TaskStatus status) {
         this.status = status;
     }
+
     public TaskType getType() {
         return type;
     }
@@ -29,7 +30,6 @@ public class Task {
     public String getName() {
         return name;
     }
-
 
 
     public void setName(String name) {
