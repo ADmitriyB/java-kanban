@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +21,8 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void addAndSaveLastVersion() {
-        Task task = new Task(0,TaskType.TASK, "Task 1", TaskStatus.NEW, "Description 1");
+        Task task = new Task(0,TaskType.TASK, "Task 1", TaskStatus.NEW,
+                "Description 1", Duration.ofMinutes(15), LocalDateTime.now());
         historyManager.addTaskToHistory(task);
         final List<Task> history = historyManager.getHistory();
         assertNotNull(history, "После добавления задачи, история не должна быть пустой.");

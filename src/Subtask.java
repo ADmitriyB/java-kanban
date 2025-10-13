@@ -1,14 +1,38 @@
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Subtask extends Task {
 
-    private final int epicId;
 
-    public Subtask(int id, TaskType type, String name, TaskStatus status, String description, int epicId) {
-        super(id, TaskType.SUBTASK, name, status, description);
+    private TaskStatus status;
+    private final int epicId;
+    private final InMemoryTaskManager taskManager = new InMemoryTaskManager();
+
+    public Subtask(int id, TaskType type, String name, TaskStatus status,
+                   String description, Duration duration, LocalDateTime startTime, int epicId) {
+        super(id, TaskType.SUBTASK, name, status, description, duration, startTime);
+
+        this.status = status;
         this.epicId = epicId;
+
     }
+
+
 
     public int getEpicId() {
         return epicId;
 
+    }
+
+    @Override
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+        taskManager.updateEpicStatus(getEpicId());
+
+    }
+
+    @Override
+    public TaskStatus getStatus() {
+        return status;
     }
 }

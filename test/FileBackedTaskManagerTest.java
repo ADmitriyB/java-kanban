@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,8 +21,11 @@ class FileBackedTaskManagerTest {
 
             FileBackedTaskManager manager = new FileBackedTaskManager(tempFile);
             // Создаем задачи и сохраняем их
-            manager.createEpic(new Epic(1, TaskType.EPIC, "Epic1", "Description"));
-            manager.createSubtask(new Subtask(2, TaskType.SUBTASK, "Subtask1", TaskStatus.NEW, "Description", 1));
+            LocalDateTime now = LocalDateTime.now();
+            manager.createEpic(new Epic(1, TaskType.EPIC,
+                    "Epic1", "Description", Duration.ofMinutes(15), now));
+            manager.createSubtask(new Subtask(2, TaskType.SUBTASK, "Subtask1", TaskStatus.NEW,
+                    "Description",Duration.ofMinutes(15), now.plusMinutes(15), 1));
 
             // Загружаем задачи из файла FileBackedTaskManager
             FileBackedTaskManager loadedManager = FileBackedTaskManager.loadFromFile(tempFile);
