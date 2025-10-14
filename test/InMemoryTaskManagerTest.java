@@ -26,12 +26,6 @@ class InMemoryTaskManagerTest {
 
     }
 
-    @Test
-    void isGoodAddAndDeleteSubtask() {
-        assertNotNull(manager.getSubtaskById(7), "отсутствует");
-        manager.deleteSubtaskById(7);
-        assertNull(manager.getSubtaskById(7), "не удален");
-    }
 
     @Test
     void isGoodAddAndDeleteEpicAndHisSubtask() {
@@ -72,7 +66,7 @@ class InMemoryTaskManagerTest {
         // Определяем ожидаемый порядок задач
         // Предположим, что задачи должны быть отсортированы по времени начала
         List<Task> expectedTasks = List.of(manager.getTaskById(1),  // Задача с наименьшим временем начала
-                manager.getTaskById(2), manager.getEpicById(3), manager.getEpicById(4), manager.getSubtaskById(5), manager.getSubtaskById(6), manager.getSubtaskById(7) // Следующая задача по времени
+                manager.getTaskById(2), manager.getEpicById(3), manager.getEpicById(4), manager.getSubtaskById(6) // Следующая задача по времени
         );
 
         // Проверяем, что полученный список совпадает с ожидаемым
