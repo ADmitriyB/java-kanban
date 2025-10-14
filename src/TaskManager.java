@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
+
     ArrayList<Task> getAllTasks();
 
     void deleteAllTasks();
@@ -41,4 +42,14 @@ public interface TaskManager {
     void deleteSubtaskById(int id);
 
     List<Task> getHistory();
+
+    List<Task> getPrioritizedTasks();
+
+    boolean tasksOverlap(Task task1, Task task2);
+
+    void checkOverlaps();
+
+    void updateEpicStatus(int epicId);
+
+
 }

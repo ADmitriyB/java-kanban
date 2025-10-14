@@ -1,12 +1,13 @@
 import exceptions.ManagerSaveException;
 
 import java.io.*;
-//ошибочно объединил ветки
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
 
 
-    private File saveFile;
+    private final File saveFile;
 
     public FileBackedTaskManager(File saveFile) {
         this.saveFile = saveFile;
@@ -108,9 +109,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String name = subtask.getName();
         TaskStatus status = subtask.getStatus();
         String description = subtask.getDescription();
+        Duration duration = subtask.getDuration();
+        LocalDateTime startTime = subtask.getStartTime();
         int epicId = subtask.getEpicId();
+        long minutes = duration.toMinutes();
 
-        return String.format("%d, %s, %s, %s, %s, %d", id, type, name, status, description, epicId);
+        return String.format("%d, %s, %s, %s, %s, %d, %s,  %d", id, type, name, status, description, minutes, startTime, epicId);
     }
 
     private String toStringTaskEpic(Task task) {
@@ -119,9 +123,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String name = task.getName();
         TaskStatus status = task.getStatus();
         String description = task.getDescription();
+        Duration duration = task.getDuration();
+        LocalDateTime startTime = task.getStartTime();
+        long minutes = duration.toMinutes();
 
 
-        return String.format("%d, %s, %s, %s, %s", id, type, name, status, description);
+        return String.format("%d, %s, %s, %s, %s, %d, %s", id, type, name, status, description, minutes, startTime);
     }
 
     private void save() {
@@ -154,7 +161,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             return null; // Пропускаем строку с заголовками
         }
         String[] parts = line.split(",");
-        if (parts.length < 5) {
+        if (parts.length < 6) {
             throw new IllegalArgumentException("Некорректная строка данных: " + line);
         }
 
@@ -163,16 +170,18 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String name = parts[2].trim();
         TaskStatus status = TaskStatus.valueOf(parts[3].trim());
         String description = parts[4].trim();
+        Duration duration = Duration.ofMinutes(Long.parseLong(parts[5].trim()));
+        LocalDateTime startTime = LocalDateTime.parse(parts[6].trim());
 
 
         switch (type) {
             case TASK:
-                return new Task(id, type, name, status, description);
+                return new Task(id, type, name, status, description, duration, startTime);
             case EPIC:
-                return new Epic(id, type, name, description);
+                return new Epic(id, type, name, description, duration, startTime);
             case SUBTASK:
-                int epicId = Integer.parseInt(parts[5].trim());
-                return new Subtask(id, type, name, status, description, epicId);
+                int epicId = Integer.parseInt(parts[7].trim());
+                return new Subtask(id, type, name, status, description, duration, startTime, epicId);
             default:
                 throw new IllegalArgumentException("Неизвестный тип задачи: " + type);
         }
