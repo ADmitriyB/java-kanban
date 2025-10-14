@@ -25,7 +25,7 @@ class FileBackedTaskManagerTest {
             manager.createEpic(new Epic(1, TaskType.EPIC,
                     "Epic1", "Description", Duration.ofMinutes(15), now));
             manager.createSubtask(new Subtask(2, TaskType.SUBTASK, "Subtask1", TaskStatus.NEW,
-                    "Description",Duration.ofMinutes(15), now.plusMinutes(15), 1));
+                    "Description", Duration.ofMinutes(15), now.plusMinutes(15), 1));
 
             // Загружаем задачи из файла FileBackedTaskManager
             FileBackedTaskManager loadedManager = FileBackedTaskManager.loadFromFile(tempFile);

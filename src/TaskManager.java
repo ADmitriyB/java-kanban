@@ -47,11 +47,9 @@ public interface TaskManager {
 
     boolean tasksOverlap(Task task1, Task task2);
 
+    void checkOverlaps();
+
     void updateEpicStatus(int epicId);
-
-
-
-
 
 
 }

@@ -21,7 +21,7 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void addAndSaveLastVersion() {
-        Task task = new Task(0,TaskType.TASK, "Task 1", TaskStatus.NEW,
+        Task task = new Task(0, TaskType.TASK, "Task 1", TaskStatus.NEW,
                 "Description 1", Duration.ofMinutes(15), LocalDateTime.now());
         historyManager.addTaskToHistory(task);
         final List<Task> history = historyManager.getHistory();

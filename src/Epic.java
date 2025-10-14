@@ -9,17 +9,7 @@ public class Epic extends Task {
     public Epic(int id, TaskType type, String name, String description, Duration duration, LocalDateTime startTime) {
         super(id, TaskType.EPIC, name, TaskStatus.NEW, description, duration, startTime);
         subtaskIds = new ArrayList<>();
-    }
 
-    public LocalDateTime getEndTime(InMemoryTaskManager taskManager) {
-        LocalDateTime endTime = null;
-        for (int subtaskId : subtaskIds) {
-            Task subtask = taskManager.getSubtaskById(subtaskId);
-            if (endTime == null || subtask.getEndTime().isAfter(endTime)) {
-                endTime = subtask.getEndTime();
-            }
-        }
-        return endTime;
     }
 
     public ArrayList<Integer> getSubtaskIds() {
