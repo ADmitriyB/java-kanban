@@ -1,4 +1,6 @@
+package managers;
 
+import tasks.Task;
 
 import java.util.*;
 

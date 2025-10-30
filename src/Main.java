@@ -1,3 +1,11 @@
+import enums.TaskStatus;
+import enums.TaskType;
+import managers.Managers;
+import managers.TaskManager;
+import tasks.Epic;
+import tasks.Subtask;
+import tasks.Task;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -8,28 +16,28 @@ public class Main {
 
 
         TaskManager manager = Managers.getDefault();
-        //HistoryManager history = Managers.getDefaultHistory();
+        //managers.HistoryManager history = managers.Managers.getDefaultHistory();
         LocalDateTime now = LocalDateTime.now();
 
         Task task1 = manager.createTask(new Task(
-                0, TaskType.TASK,"Task 1", TaskStatus.NEW, "Description 1", Duration.ofMinutes(15), now));
+                0, TaskType.TASK,"tasks.Task 1", TaskStatus.NEW, "Description 1", Duration.ofMinutes(15), now));
         Task task2 = manager.createTask(new Task(
-                0, TaskType.TASK,"Task 2", TaskStatus.NEW, "Description 2", Duration.ofMinutes(15), now.plusMinutes(15)));
+                0, TaskType.TASK,"tasks.Task 2", TaskStatus.NEW, "Description 2", Duration.ofMinutes(15), now.plusMinutes(15)));
 
         Epic epic1 = manager.createEpic(new Epic(
-                0, TaskType.EPIC,"Epic 1", "Description Epic 1", Duration.ofMinutes(15), now.plusMinutes(30)));
+                0, TaskType.EPIC,"tasks.Epic 1", "Description tasks.Epic 1", Duration.ofMinutes(15), now.plusMinutes(30)));
         Epic epic2 = manager.createEpic(new Epic(
-                0, TaskType.EPIC,"Epic 2", "Description Epic 2", Duration.ofMinutes(15), now.plusMinutes(45)));
+                0, TaskType.EPIC,"tasks.Epic 2", "Description tasks.Epic 2", Duration.ofMinutes(15), now.plusMinutes(45)));
 
         Subtask subtask1 = manager.createSubtask(
-                new Subtask(0, TaskType.SUBTASK,"Subtask 1", TaskStatus.NEW,
-                        "Description Subtask 1", Duration.ofMinutes(15), now.plusMinutes(60), epic1.getId()));
+                new Subtask(0, TaskType.SUBTASK,"tasks.Subtask 1", TaskStatus.NEW,
+                        "Description tasks.Subtask 1", Duration.ofMinutes(15), now.plusMinutes(60), epic1.getId()));
         Subtask subtask2 = manager.createSubtask(
-                new Subtask(0, TaskType.SUBTASK,"Subtask 2", TaskStatus.DONE,
-                        "Description Subtask 2", Duration.ofMinutes(15), now.plusMinutes(75), epic1.getId()));
+                new Subtask(0, TaskType.SUBTASK,"tasks.Subtask 2", TaskStatus.DONE,
+                        "Description tasks.Subtask 2", Duration.ofMinutes(15), now.plusMinutes(75), epic1.getId()));
         Subtask subtask3 = manager.createSubtask(
-                new Subtask(0, TaskType.SUBTASK,"Subtask 3", TaskStatus.IN_PROGRESS,
-                        "Description Subtask 3", Duration.ofMinutes(15), now.plusMinutes(90), epic2.getId()));
+                new Subtask(0, TaskType.SUBTASK,"tasks.Subtask 3", TaskStatus.IN_PROGRESS,
+                        "Description tasks.Subtask 3", Duration.ofMinutes(15), now.plusMinutes(90), epic2.getId()));
 
         System.out.println(manager.getAllTasks());
         System.out.println(manager.getAllEpics());
