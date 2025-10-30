@@ -57,5 +57,5 @@ public interface TaskManager {
 
     void updateEpicStatus(int epicId);
 
-    boolean hasTimeConflict (Task newTask);
+    boolean hasTimeConflict(Task newTask);
 }
