@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public class TasksHandler extends BaseHttpHandler{
+public class TasksHandler extends BaseHttpHandler {
     public TasksHandler(TaskManager taskManager, Gson gson) {
         super(taskManager, gson);
     }
@@ -46,11 +46,13 @@ public class TasksHandler extends BaseHttpHandler{
             sendInternalError(exchange);
         }
     }
+
     private void handleGetAllTasks(HttpExchange exchange) throws IOException {
         List<Task> tasks = taskManager.getAllTasks();
         String response = gson.toJson(tasks);
         sendSuccess(exchange, response);
     }
+
     private void handleGetTaskById(HttpExchange exchange) throws IOException {
         Optional<Integer> idOpt = parseIdFromPath(exchange.getRequestURI().getPath());
         if (idOpt.isEmpty()) {
@@ -70,6 +72,7 @@ public class TasksHandler extends BaseHttpHandler{
             sendInternalError(exchange);
         }
     }
+
     private void handleCreateOrUpdateTask(HttpExchange exchange) throws IOException {
         try {
             String body = readRequestBody(exchange);
@@ -95,10 +98,12 @@ public class TasksHandler extends BaseHttpHandler{
             sendInternalError(exchange);
         }
     }
+
     private void handleDeleteAllTasks(HttpExchange exchange) throws IOException {
         taskManager.deleteAllTasks();
         sendSuccess(exchange, "{\"message\": \"All tasks deleted\"}");
     }
+
     private void handleDeleteTaskById(HttpExchange exchange) throws IOException {
         Optional<Integer> idOpt = parseIdFromPath(exchange.getRequestURI().getPath());
         if (idOpt.isEmpty()) {
