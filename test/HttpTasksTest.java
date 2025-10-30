@@ -14,10 +14,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class HttpTasksTest extends BaseHttpTest{
+public class HttpTasksTest extends BaseHttpTest {
 
     LocalDateTime now = LocalDateTime.now();
-    Task task = new Task(0, TaskType.TASK,"Test Task", TaskStatus.NEW,"Test Description",
+    Task task = new Task(0, TaskType.TASK, "Test Task", TaskStatus.NEW, "Test Description",
             Duration.ofMinutes(15), now);
 
 
@@ -89,7 +89,7 @@ public class HttpTasksTest extends BaseHttpTest{
         int taskId = manager.createTask(task).getId();
 
         // Обновляем задачу
-        Task updatedTask = new Task(taskId, TaskType.TASK, "Updated Task", TaskStatus.IN_PROGRESS,"Updated Description",
+        Task updatedTask = new Task(taskId, TaskType.TASK, "Updated Task", TaskStatus.IN_PROGRESS, "Updated Description",
                 Duration.ofMinutes(30), LocalDateTime.now().plusHours(1));
 
         Gson gson = taskServer.getGson();
@@ -133,7 +133,7 @@ public class HttpTasksTest extends BaseHttpTest{
     @Test
     public void testDeleteAllTasks() throws Exception {
         // Сначала создаем несколько задач
-        Task task1 = new Task(0, TaskType.TASK,"Task 1", TaskStatus.NEW,"Description 1",
+        Task task1 = new Task(0, TaskType.TASK, "Task 1", TaskStatus.NEW, "Description 1",
                 Duration.ofMinutes(30), now);
         Task task2 = new Task(0, TaskType.TASK, "Task 2", TaskStatus.NEW, "Description 2",
                 Duration.ofMinutes(45), now.plusHours(1));
@@ -156,12 +156,12 @@ public class HttpTasksTest extends BaseHttpTest{
     @Test
     public void testCreateTaskWithTimeConflict() throws Exception {
         // Сначала создаем задачу
-        Task task1 = new Task(0, TaskType.TASK,"Task 1", TaskStatus.NEW, "Description 1",
+        Task task1 = new Task(0, TaskType.TASK, "Task 1", TaskStatus.NEW, "Description 1",
                 Duration.ofMinutes(60), now);
         manager.createTask(task1);
 
         // Пытаемся создать задачу с пересекающимся временем
-        Task task2 = new Task(0, TaskType.TASK, "Task 2", TaskStatus.NEW,"Description 2",
+        Task task2 = new Task(0, TaskType.TASK, "Task 2", TaskStatus.NEW, "Description 2",
                 Duration.ofMinutes(30), now.plusMinutes(30));
 
 

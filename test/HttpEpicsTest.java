@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class HttpEpicsTest extends BaseHttpTest{
+public class HttpEpicsTest extends BaseHttpTest {
 
     Epic epic = new Epic(0, TaskType.EPIC, "Test Epic", "Test Description",
             Duration.ofMinutes(15), LocalDateTime.now());

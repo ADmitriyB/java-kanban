@@ -17,6 +17,7 @@ public class HttpTaskServer {
     private final HttpServer server;
     private final TaskManager taskManager;
     private final Gson gson;
+
     public HttpTaskServer(TaskManager taskManager) throws IOException {
         this.taskManager = taskManager;
         this.server = HttpServer.create(new InetSocketAddress(PORT), 0);
@@ -28,10 +29,12 @@ public class HttpTaskServer {
         configureRoutes();
 
     }
+
     // Конструктор по умолчанию
     public HttpTaskServer() throws IOException {
         this(Managers.getDefault());
     }
+
     private void configureRoutes() {
         server.createContext("/tasks", new TasksHandler(taskManager, gson));
         server.createContext("/subtasks", new SubtasksHandler(taskManager, gson));
@@ -39,6 +42,7 @@ public class HttpTaskServer {
         server.createContext("/history", new HistoryHandler(taskManager, gson));
         server.createContext("/prioritized", new PrioritizedHandler(taskManager, gson));
     }
+
     public void start() {
         server.start();
         System.out.println("HTTP Task Server started on port " + PORT);
