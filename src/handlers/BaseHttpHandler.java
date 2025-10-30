@@ -19,6 +19,7 @@ public abstract class BaseHttpHandler implements HttpHandler {
         this.taskManager = taskManager;
         this.gson = gson;
     }
+
     protected void sendText(HttpExchange h, String text, int code) throws IOException {
         byte[] resp = text.getBytes(StandardCharsets.UTF_8);
         h.getResponseHeaders().add("Content-Type", "application/json;charset=utf-8");
