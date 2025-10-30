@@ -1,5 +1,11 @@
+import enums.TaskStatus;
+import enums.TaskType;
+import managers.Managers;
+import managers.TaskManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tasks.Epic;
+import tasks.Subtask;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -13,14 +19,14 @@ abstract class TaskManagerTest<T extends TaskManager> {
     @BeforeEach
     void newTaskManager() {
         manager = Managers.getDefault();
-        Epic epic1 = manager.createEpic(new Epic(0, TaskType.EPIC, "Epic 1",
-                "Description Epic 1", Duration.ofMinutes(10), now.plusMinutes(30)));
+        Epic epic1 = manager.createEpic(new Epic(0, TaskType.EPIC, "tasks.Epic 1",
+                "Description tasks.Epic 1", Duration.ofMinutes(10), now.plusMinutes(30)));
 
-        Subtask subtask1 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "Subtask 1",
-                TaskStatus.NEW, "Description Subtask 1", Duration.ofMinutes(10), now.plusMinutes(60), epic1.getId()));
+        Subtask subtask1 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "tasks.Subtask 1",
+                TaskStatus.NEW, "Description tasks.Subtask 1", Duration.ofMinutes(10), now.plusMinutes(60), epic1.getId()));
 
-        Subtask subtask2 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "Subtask 2",
-                TaskStatus.NEW, "Description Subtask 2", Duration.ofMinutes(10), now.plusMinutes(75), epic1.getId()));
+        Subtask subtask2 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "tasks.Subtask 2",
+                TaskStatus.NEW, "Description tasks.Subtask 2", Duration.ofMinutes(10), now.plusMinutes(75), epic1.getId()));
     }
 
     @Test

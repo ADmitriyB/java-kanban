@@ -1,3 +1,8 @@
+package tasks;
+
+import enums.TaskStatus;
+import enums.TaskType;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -98,7 +103,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "tasks.Task{" +
                 "id=" + id +
                 ", type=" + type +
                 ", name=" + name + '\'' +
