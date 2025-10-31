@@ -1,4 +1,9 @@
+import enums.TaskStatus;
+import enums.TaskType;
+import managers.FileBackedTaskManager;
 import org.junit.jupiter.api.Test;
+import tasks.Epic;
+import tasks.Subtask;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +32,7 @@ class FileBackedTaskManagerTest {
             manager.createSubtask(new Subtask(2, TaskType.SUBTASK, "Subtask1", TaskStatus.NEW,
                     "Description", Duration.ofMinutes(15), now.plusMinutes(15), 1));
 
-            // Загружаем задачи из файла FileBackedTaskManager
+            // Загружаем задачи из файла managers.FileBackedTaskManager
             FileBackedTaskManager loadedManager = FileBackedTaskManager.loadFromFile(tempFile);
             // Проверяем, что задачи были успешно загружены
             assertEquals(manager.getAllTasks(), loadedManager.getAllTasks());

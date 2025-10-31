@@ -1,5 +1,12 @@
+import enums.TaskStatus;
+import enums.TaskType;
+import managers.Managers;
+import managers.TaskManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tasks.Epic;
+import tasks.Subtask;
+import tasks.Task;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -14,15 +21,15 @@ class InMemoryTaskManagerTest {
     @BeforeEach
     void newTaskManager() {
         manager = Managers.getDefault();
-        manager.createTask(new Task(0, TaskType.TASK, "Task 1", TaskStatus.NEW, "Description 1", Duration.ofMinutes(10), now));
-        manager.createTask(new Task(0, TaskType.TASK, "Task 2", TaskStatus.NEW, "Description 2", Duration.ofMinutes(10), now.plusMinutes(15)));
+        manager.createTask(new Task(0, TaskType.TASK, "tasks.Task 1", TaskStatus.NEW, "Description 1", Duration.ofMinutes(10), now));
+        manager.createTask(new Task(0, TaskType.TASK, "tasks.Task 2", TaskStatus.NEW, "Description 2", Duration.ofMinutes(10), now.plusMinutes(15)));
 
-        Epic epic1 = manager.createEpic(new Epic(0, TaskType.EPIC, "Epic 1", "Description Epic 1", Duration.ofMinutes(10), now.plusMinutes(30)));
-        Epic epic2 = manager.createEpic(new Epic(0, TaskType.EPIC, "Epic 2", "Description Epic 2", Duration.ofMinutes(10), now.plusMinutes(45)));
+        Epic epic1 = manager.createEpic(new Epic(0, TaskType.EPIC, "tasks.Epic 1", "Description tasks.Epic 1", Duration.ofMinutes(10), now.plusMinutes(30)));
+        Epic epic2 = manager.createEpic(new Epic(0, TaskType.EPIC, "tasks.Epic 2", "Description tasks.Epic 2", Duration.ofMinutes(10), now.plusMinutes(45)));
 
-        Subtask subtask1 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "Subtask 1", TaskStatus.NEW, "Description Subtask 1", Duration.ofMinutes(10), now.plusMinutes(60), epic1.getId()));
-        Subtask subtask2 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "Subtask 2", TaskStatus.DONE, "Description Subtask 2", Duration.ofMinutes(10), now.plusMinutes(75), epic1.getId()));
-        Subtask subtask3 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "Subtask 3", TaskStatus.IN_PROGRESS, "Description Subtask 3", Duration.ofMinutes(10), now.plusMinutes(90), epic2.getId()));
+        Subtask subtask1 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "tasks.Subtask 1", TaskStatus.NEW, "Description tasks.Subtask 1", Duration.ofMinutes(10), now.plusMinutes(60), epic1.getId()));
+        Subtask subtask2 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "tasks.Subtask 2", TaskStatus.DONE, "Description tasks.Subtask 2", Duration.ofMinutes(10), now.plusMinutes(75), epic1.getId()));
+        Subtask subtask3 = manager.createSubtask(new Subtask(0, TaskType.SUBTASK, "tasks.Subtask 3", TaskStatus.IN_PROGRESS, "Description tasks.Subtask 3", Duration.ofMinutes(10), now.plusMinutes(90), epic2.getId()));
 
     }
 
@@ -46,7 +53,7 @@ class InMemoryTaskManagerTest {
     @Test
     void doesNotConflictId() {
         assertNull(manager.getTaskById(8), "отсутствует");
-        Task task = manager.createTask(new Task(1, TaskType.TASK, "Task", TaskStatus.NEW, "Description", Duration.ofMinutes(15), LocalDateTime.now()));
+        Task task = manager.createTask(new Task(1, TaskType.TASK, "tasks.Task", TaskStatus.NEW, "Description", Duration.ofMinutes(15), LocalDateTime.now()));
         assertNotNull(manager.getTaskById(8), "не удален");
     }
 
@@ -54,9 +61,9 @@ class InMemoryTaskManagerTest {
     @Test
     void isNamelessnessAfterCreate() {
         Task task = manager.getSubtaskById(5);
-        assertEquals("Subtask 1", task.getName());
+        assertEquals("tasks.Subtask 1", task.getName());
         assertEquals(TaskStatus.NEW, task.getStatus());
-        assertEquals("Description Subtask 1", task.getDescription());
+        assertEquals("Description tasks.Subtask 1", task.getDescription());
     }
 
     @Test
